@@ -23,7 +23,7 @@
     <dependency>
       <groupId>org.mindrot</groupId>
       <artifactId>jbcrypt</artifactId>
-      <version>0.3m</version>
+      <version>0.4</version>
     </dependency>
 
     <dependency>
@@ -74,12 +74,12 @@
       <version>2.1.9</version>
     </dependency>
   </dependencies>
-         
-   <build> 
+
+   <build>
      <plugins>
-       <plugin> 
-         <artifactId>maven-compiler-plugin</artifactId> 
+       <plugin>
+         <artifactId>maven-compiler-plugin</artifactId>
        </plugin>
-     </plugins> 
+     </plugins>
    </build>
 </project>
