@@ -1,4 +1,4 @@
-# [:] Example Maven Project
+# [:] Example Browntown Maven Project
 
 An example maven project to demonstrate [srcclr](https://www.srcclr.com) scans.
 
