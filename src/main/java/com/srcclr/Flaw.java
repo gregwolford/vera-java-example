@@ -1,3 +1,5 @@
+package com.srcclr;
+
 public class Flaw {
   
     String passwd = "test1234";
