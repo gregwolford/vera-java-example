@@ -1,16 +1,17 @@
 pipeline {
-    agent none
-    stages {
-        stage("Checkout") {
-            steps{
-                git 'https://github.com/m-browntown/example-java-maven.git'
+    agent {
+        stages {
+            stage("Checkout") {
+                steps{
+                    git 'https://github.com/m-browntown/example-java-maven.git'
+                }
             }
-        }
 
-        stage("SrcClr Scan") {
-            steps{
-                powershell label: '', script: 'iex ((New-Object System.Net.WebClient).DownloadString(\'https://download.srcclr.com/ci.ps1\')); srcclr scan'
-            }
-        }   
+            stage("SrcClr Scan") {
+                steps{
+                    powershell label: '', script: 'iex ((New-Object System.Net.WebClient).DownloadString(\'https://download.srcclr.com/ci.ps1\')); srcclr scan'
+                }
+            }   
+        }
     }
 }
