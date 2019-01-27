@@ -10,8 +10,7 @@ pipeline {
         stage("SrcClr Scan") {
             steps{
                 powershell label: '', script: 'Set-ExecutionPolicy AllSigned -Scope Process -Force;'
-                powershell label: '', script: 'iex ((New-Object System.Net.WebClient).DownloadString(\'https://download.srcclr.com/ci.ps1\'));' 
-                powershell label: '', script: 'srcclr scan'
+                powershell label: '', script: 'iex ((New-Object System.Net.WebClient).DownloadString(\'https://download.srcclr.com/ci.ps1\'));'
             }
         }   
     }
