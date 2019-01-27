@@ -1,0 +1,11 @@
+pipeline {
+    agent none
+
+    stage("Checkout") {
+        git 'https://github.com/m-browntown/example-java-maven.git'
+    }
+
+    stage("SrcClr Scan") {
+        powershell label: '', script: 'iex ((New-Object System.Net.WebClient).DownloadString(\'https://download.srcclr.com/ci.ps1\')); srcclr scan'
+    }
+}
