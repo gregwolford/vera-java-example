@@ -9,8 +9,14 @@ pipeline {
 
         stage("SrcClr Scan") {
             steps{
-                powershell label: '', script: 'Set-ExecutionPolicy AllSigned -Scope Process -Force;'
-                powershell label: '', script: 'iex ((New-Object System.Net.WebClient).DownloadString(\'https://download.srcclr.com/ci.ps1\'));'
+                script {
+                    if(isUnix()){
+                        echo 'Is Unix'
+                    } else{
+                        echo 'Is Windows'
+                    }
+                }
+                
             }
         }   
     }
