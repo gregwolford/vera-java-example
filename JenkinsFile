@@ -45,7 +45,7 @@ pipeline {
                                                              $UnzippedOutputFile = "target/gl-scanner-java-LATEST/gl-scanner-java.jar"
                                                              Invoke-WebRequest -OutFile $OutputFile -URI $Url
                                                              Add-Type -assembly "system.io.compression.filesystem"
-                                                             [io.compression.zipfile]::ExtractToDirectory($OutputFile, $UnzippedOutputFile)
+                                                             [io.compression.zipfile]::ExtractToDirectory($OutputFile, $UnzippedOutputFolder)
 
                                                             java -jar $UnzippedOutputFile --api_id %USERNAME% --api_secret_key %PASSWORD% source_dir = "src/main/java" target_dir = "target/classes"
                                                             '''
