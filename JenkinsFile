@@ -8,19 +8,34 @@ pipeline {
         }
 
         stage("SrcClr Scan") {
-            steps{
+            steps {
                 script {
                     if(isUnix()){
-                        //Unix Block
+                        withCredentials([string(credentialsId: 'SRCCLR_API_TOKEN', variable: 'SRCCLR_API_TOKEN')]) {
+                            sh label: '', script: 'curl -sSL https://download.sourceclear.com/ci.sh | sh'
+                        }
                     } else{
                         withCredentials([string(credentialsId: 'SRCCLR_API_TOKEN', variable: 'SRCCLR_API_TOKEN')]) {
                             powershell label: '', script: 'Set-ExecutionPolicy AllSigned -Scope Process -Force;'
                             powershell label: '', script: 'iex ((New-Object System.Net.WebClient).DownloadString("https://download.srcclr.com/ci.ps1")); srcclr scan'
                         }
                     }
-                }
-                
+                } 
             }
-        }   
+        }
+
+        stage("Build") {
+            steps {
+                if(isUnix()){
+                    withMaven(maven: 'Maven') {
+                        sh label: '', script: 'mvn clean package'
+                    }
+                } else {
+                    withMaven(maven: 'Maven') {
+                        bat label: '', script: 'mvn clean package'
+                    }
+                }
+            }   
+        }
     }
 }
