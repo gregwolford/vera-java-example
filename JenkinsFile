@@ -47,7 +47,7 @@ pipeline {
                                                              Add-Type -assembly "system.io.compression.filesystem"
                                                              [io.compression.zipfile]::ExtractToDirectory($OutputFile, $UnzippedOutputFolder)
 
-                                                            java -jar $UnzippedOutputFile --api_id $env:USERNAME --api_secret_key $env:PASSWORD --source_dir "src/main/java" --build_dir "target/classes"
+                                                            java -jar $UnzippedOutputFile --api_id $env:USERNAME --api_secret_key $env:PASSWORD --build_dir "target/classes" --issue_counts "3:0,2:0,1:0,0:0"
                                                             '''
                         }
                     }
