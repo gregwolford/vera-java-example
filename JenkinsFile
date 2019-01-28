@@ -41,10 +41,12 @@ pipeline {
             }   
         }
 
+        /*
         stage("Veracode Static Analysis") {
             steps {
-                //under construction
+                //Under Construction
             }
         }
+        */
     }
 }
