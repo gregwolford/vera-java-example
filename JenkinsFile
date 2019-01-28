@@ -18,7 +18,8 @@ pipeline {
                     } else {
                         withCredentials([string(credentialsId: 'SRCCLR_API_TOKEN', variable: 'SRCCLR_API_TOKEN')]) {
                             powershell label: '', script: 'Set-ExecutionPolicy AllSigned -Scope Process -Force;'
-                            powershell label: '', script: 'iex ((New-Object System.Net.WebClient).DownloadString("https://download.srcclr.com/ci.ps1")); srcclr scan'
+                            powershell label: '', script: 'iex ((New-Object System.Net.WebClient).DownloadString("https://download.srcclr.com/ci.ps1")); 
+                            srcclr scan'
                         }
                     }
                 } 
@@ -47,7 +48,11 @@ pipeline {
                                                              Add-Type -assembly "system.io.compression.filesystem"
                                                              [io.compression.zipfile]::ExtractToDirectory($OutputFile, $UnzippedOutputFolder)
 
-                                                            java -jar $UnzippedOutputFile --api_id %USERNAME% --api_secret_key %PASSWORD% --source_dir "src/main/java" --build_dir = "target/classes"
+                                                            java -jar $UnzippedOutputFile 
+                                                                --api_id %USERNAME% 
+                                                                --api_secret_key %PASSWORD% 
+                                                                --source_dir "src/main/java" 
+                                                                --build_dir "target/classes"
                                                             '''
                         }
                     }
