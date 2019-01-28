@@ -13,9 +13,10 @@ pipeline {
                     if(isUnix()){
                         echo 'Is Unix'
                     } else{
-                        withCredentials([apiToken(credentialsId: 'SourceClear Token', usernameVariable: 'SRCCLR_API_TOKEN')])
                         echo 'Is Windows'
-                        echo SRCCLR_API_TOKEN
+                        withCredentials([string(credentialsId: 'SRCCLR_API_TOKEN', variable: 'SRCCLR_API_TOKEN')]) {
+                            echo SRCCLR_API_TOKEN
+                        }
                     }
                 }
                 
