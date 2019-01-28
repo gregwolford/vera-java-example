@@ -43,13 +43,11 @@ pipeline {
                                                              $Url = "https://downloads.veracode.com/securityscan/gl-scanner-java-LATEST.zip"
                                                              $UnzippedOutputFolder = "target/gl-scanner-java-LATEST"
                                                              $UnzippedOutputFile = "target/gl-scanner-java-LATEST/gl-scanner-java.jar"
-                                                             $SOURCE_DIR = "src/main/java"
-                                                             $TARGET_DIR = "target/classes"
                                                              Invoke-WebRequest -OutFile $OutputFile -URI $Url
                                                              Add-Type -assembly "system.io.compression.filesystem"
                                                              [io.compression.zipfile]::ExtractToDirectory($OutputFile, $UnzippedOutputFolder)
 
-                                                            java -jar $UnzippedOutputFile --api_id %USERNAME% --api_secret_key %PASSWORD% --source_dir = $SOURCE_DIR --target_dir = $TARGET_DIR
+                                                            java -jar $UnzippedOutputFile --api_id %USERNAME% --api_secret_key %PASSWORD% --source_dir "src/main/java" --target_dir = "target/classes"
                                                             '''
                         }
                     }
