@@ -11,11 +11,12 @@ pipeline {
             steps{
                 script {
                     if(isUnix()){
-                        echo 'Is Unix'
+                        //Unix Block
                     } else{
-                        echo 'Is Windows'
                         withCredentials([string(credentialsId: 'SRCCLR_API_TOKEN', variable: 'SRCCLR_API_TOKEN')]) {
-                            echo SRCCLR_API_TOKEN
+                            powershell label: '', script: 'Set-ExecutionPolicy AllSigned -Scope Process -Force;'
+                            powershell label: '', script: '(New-Object System.Net.WebClient).DownloadString(\'https://download.srcclr.com/ci.ps1\');'
+                            powershell label: '', script: 'srcclr scan;'
                         }
                     }
                 }
