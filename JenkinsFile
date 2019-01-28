@@ -39,10 +39,10 @@ pipeline {
 
                         withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'GREENLIGHT_API_CREDENTIALS',
                         usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
-                            powershell label: '', script: '''$OutputFile = "/gl-scanner-java-LATEST.zip"
+                            powershell label: '', script: '''$OutputFile = \'${WORKSPACE}/gl-scanner-java-LATEST.zip\'
                                                              $Url = "https://downloads.veracode.com/securityscan/gl-scanner-java-LATEST.zip"
-                                                             $UnzippedOutputFolder = "/gl-scanner-java-LATEST"
-                                                             $UnzippedOutputFile = "/gl-scanner-java-LATEST/gl-scanner-java.jar"
+                                                             $UnzippedOutputFolder = \'${WORKSPACE}/gl-scanner-java-LATEST\'
+                                                             $UnzippedOutputFile = \'${WORKSPACE}/gl-scanner-java-LATEST/gl-scanner-java.jar"
                                                              Invoke-WebRequest -OutFile $OutputFile -URI $Url
                                                              Add-Type -assembly "system.io.compression.filesystem"
                                                              [io.compression.zipfile]::ExtractToDirectory($OutputFile, $UnzippedOutputFile)
