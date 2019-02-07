@@ -82,7 +82,7 @@ pipeline {
         stage("Veracode Dynamic DS") {
             steps {
                 script {
-                    veracodeDynamicRescan applicationName: 'Java_SrcClr', pHost: '', pPassword: '', pUser: '', vid: '', vkey: '', vpassword: 'HM{fv9PFNkahGeWcbA', vuser: 'vera_mbrown'
+                    veracodeDynamicRescan applicationName: 'Java_SrcClr', pHost: '', pPassword: '', pUser: '', vid: '', vkey: '', vpassword: '', vuser: ''
                 }
             }
         }
