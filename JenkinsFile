@@ -71,17 +71,14 @@ pipeline {
             }   
         }
 
-        /*
         stage("Veracode Static Analysis") {
             steps {
                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'GREENLIGHT_API_CREDENTIALS',
                         usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]){
-                veracode applicationName: 'Java_SrcClr', criticality: 'VeryHigh', fileNamePattern: '', replacementPattern: '', 
-                sandboxName: '', scanExcludesPattern: '', scanIncludesPattern: '', scanName: 'Java Example - Jenkins Build $BuildNumber', 
-                teams: '', uploadExcludesPattern: '', uploadIncludesPattern: '****.jar', vid: '', vkey: '', vpassword: '$env:USERNAME', vuser: '$env:PASSWORD'
+                veracode applicationName: 'Java_SrcClr', criticality: 'VeryHigh', fileNamePattern: '', replacementPattern: '', sandboxName: '', scanExcludesPattern: '', scanIncludesPattern: '', scanName: 'Java Example - Jenkins Build $buildnumber', 
+                teams: '', uploadExcludesPattern: '', uploadIncludesPattern: '**/**.jar', vid: '', vkey: '', vpassword: USERNAME, vuser: PASSWORD
                 }
             }
         }
-        */
     }
 }
