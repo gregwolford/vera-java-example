@@ -71,18 +71,11 @@ pipeline {
             }   
         }
 
-        /*
         stage("Veracode Static Analysis") {
             steps {
-                //Under Construction
-            }
-        }
-        */
-
-        stage("Veracode Dynamic DS") {
-            steps {
-                script {
-                    veracodeDynamicRescan applicationName: 'Java_SrcClr', pHost: '', pPassword: '', pUser: '', vid: '', vkey: '', vpassword: '', vuser: ''
+                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'GREENLIGHT_API_CREDENTIALS',
+                        usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]){
+                veracode applicationName: 'Java_SrcClr', criticality: 'VeryHigh', fileNamePattern: '', replacementPattern: '', sandboxName: '', scanExcludesPattern: '', scanIncludesPattern: '', scanName: 'Java Example - Jenkins Build $BuildNumber', teams: '', uploadExcludesPattern: '', uploadIncludesPattern: '**/**.jar', vid: '', vkey: '', vpassword: $env:USERNAME, vuser: $env:PASSWORD
                 }
             }
         }
