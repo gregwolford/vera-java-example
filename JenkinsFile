@@ -76,7 +76,7 @@ pipeline {
                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: '64672074-9921-4736-8a5e-abedf69113fc',
                         usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]){
                 veracode applicationName: 'Java_SrcClr', criticality: 'VeryHigh', fileNamePattern: '', replacementPattern: '', sandboxName: '', scanExcludesPattern: '', scanIncludesPattern: '', scanName: 'Java Example - Jenkins Build $buildnumber', 
-                teams: '', uploadExcludesPattern: '', uploadIncludesPattern: '**/**.jar', vid: '', vkey: '', vpassword: USERNAME, vuser: PASSWORD
+                teams: '', uploadExcludesPattern: '', uploadIncludesPattern: '**/**.jar', vid: '', vkey: '', vuser: USERNAME, vpassword: PASSWORD
                 }
             }
         }
