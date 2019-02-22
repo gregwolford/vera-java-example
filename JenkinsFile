@@ -73,7 +73,7 @@ pipeline {
         stage("Veracode Static Analysis") {
             steps {
                 withCredentials([usernamePassword(credentialsId: 'veracode-credentials', passwordVariable: 'veracode_key', usernameVariable: 'veracode_id')]) {
-                    veracode applicationName: 'Java_SrcClr', criticality: 'VeryHigh', debug: true, fileNamePattern: '', replacementPattern: '', sandboxName: 'Matt Brown', scanExcludesPattern: '', scanIncludesPattern: '', scanName: '$timestamp', teams: '', uploadExcludesPattern: '', uploadIncludesPattern: '**/**.jar', useIDkey: true, vid: env.veracode_id, vkey: env.veracode_key, vpassword: '', vuser: ''
+                    veracode applicationName: 'Java_SrcClr', criticality: 'VeryHigh', debug: true, fileNamePattern: '', replacementPattern: '', sandboxName: '', scanExcludesPattern: '', scanIncludesPattern: '', scanName: '$buildnumber', teams: '', uploadExcludesPattern: '', uploadIncludesPattern: '**/**.jar', useIDkey: true, vid: env.veracode_id, vkey: env.veracode_key, vpassword: '', vuser: ''
                 }
             }
         }
