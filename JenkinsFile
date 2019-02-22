@@ -73,9 +73,9 @@ pipeline {
 
         stage("Veracode Static Analysis") {
             steps {
-                withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: '64672074-9921-4736-8a5e-abedf69113fc',
-                        passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME']]){
-                bat label: '', script: 'echo $env:USERNAME'}
+                withCredentials([usernamePassword(credentialsId: '64672074-9921-4736-8a5e-abedf69113fc', passwordVariable: 'veracode_key', usernameVariable: 'veracode_id')]) {
+                    veracode applicationName: 'Java_SrcClr', criticality: 'VeryHigh', debug: true, fileNamePattern: '', replacementPattern: '', sandboxName: 'Matt Brown', scanExcludesPattern: '', scanIncludesPattern: '', scanName: '$timestamp', teams: '', uploadExcludesPattern: '', uploadIncludesPattern: '**/**.jar', useIDkey: true, vid: 'veracode_id', vkey: 'veracode_key', vpassword: '', vuser: ''
+                }
             }
         }
     }
