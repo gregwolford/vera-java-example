@@ -37,8 +37,7 @@ pipeline {
                             bat label: '', script: 'mvn clean verify'
                         }
 
-                        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'GREENLIGHT_API_CREDENTIALS',
-                        usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
+                        withCredentials([usernamePassword(credentialsId: 'veracode-credentials', passwordVariable: 'veracode_key', usernameVariable: 'veracode_id')]) {
                             powershell label: '', script: '''$OutputFile = "target/gl-scanner-java-LATEST.zip"
                                                              $Url = "https://downloads.veracode.com/securityscan/gl-scanner-java-LATEST.zip"
                                                              $UnzippedOutputFolder = "target/gl-scanner-java-LATEST"
@@ -47,7 +46,7 @@ pipeline {
                                                              Add-Type -assembly "system.io.compression.filesystem"
                                                              [io.compression.zipfile]::ExtractToDirectory($OutputFile, $UnzippedOutputFolder)
 
-                                                            java -jar $UnzippedOutputFile --api_id $env:USERNAME --api_secret_key $env:PASSWORD --build_dir "target/classes" --issue_counts "3:0,2:0,1:0,0:0"
+                                                            java -jar $UnzippedOutputFile --api_id $env:veracode_id --api_secret_key $env:veracode_key --build_dir "target/classes" --issue_counts "3:0,2:0,1:0,0:0"
                                                             '''
                         }
                     }
@@ -73,7 +72,7 @@ pipeline {
 
         stage("Veracode Static Analysis") {
             steps {
-                withCredentials([usernamePassword(credentialsId: '64672074-9921-4736-8a5e-abedf69113fc', passwordVariable: 'veracode_key', usernameVariable: 'veracode_id')]) {
+                withCredentials([usernamePassword(credentialsId: 'veracode-credentials', passwordVariable: 'veracode_key', usernameVariable: 'veracode_id')]) {
                     veracode applicationName: 'Java_SrcClr', criticality: 'VeryHigh', debug: true, fileNamePattern: '', replacementPattern: '', sandboxName: 'Matt Brown', scanExcludesPattern: '', scanIncludesPattern: '', scanName: '$timestamp', teams: '', uploadExcludesPattern: '', uploadIncludesPattern: '**/**.jar', useIDkey: true, vid: 'veracode_id', vkey: 'veracode_key', vpassword: '', vuser: ''
                 }
             }
