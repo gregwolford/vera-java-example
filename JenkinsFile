@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage("Checkout") {
             steps{
-                git 'https://github.com/m-browntown/example-java-maven.git'
+                git 'https://github.com/m-browntown/example-vera-java.git'
             }
         }
 
