@@ -75,7 +75,7 @@ pipeline {
             steps {
                 withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: '64672074-9921-4736-8a5e-abedf69113fc',
                         passwordVariable: 'PASSWORD', usernameVariable: 'USERNAME']]){
-                bat label: '', script: 'echo "$USERNAME"'}
+                bat label: '', script: 'echo $env:USERNAME'}
             }
         }
     }
