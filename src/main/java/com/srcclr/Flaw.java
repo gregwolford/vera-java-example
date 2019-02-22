@@ -9,6 +9,7 @@ public class Flaw {
 
     Random rand = new Random();
     double randDouble = rand.nextDouble();
+    double someDouble = 1.0;
 
     public static void main(String[] args) {
         // Prints "Hello, World" to the terminal window.
