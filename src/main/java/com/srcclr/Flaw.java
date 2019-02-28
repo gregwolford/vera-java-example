@@ -6,7 +6,7 @@ public class Flaw {
   
     String passwdOther = "test1234a12331";
     String otherpassword = "tests";
-
+    String thing = "test";
     Random rand = new Random();
     double randDouble = rand.nextDouble();
     double someDouble = 1.0;
