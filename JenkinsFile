@@ -32,6 +32,11 @@ pipeline {
                         withMaven(maven: 'Maven') {
                             sh label: '', script: 'mvn clean verify'
                         }
+                        withCredentials([usernamePassword(credentialsId: 'veracode-credentials', passwordVariable: 'veracode_key', usernameVariable: 'veracode_id')]) {
+                           sh `curl -O https://downloads.veracode.com/securityscan/gl-scanner-java-LATEST.zip` \
+                           sh `unzip gl-scanner-java-LATEST.zip gl-scanner-java.jar` \
+                           sh `java -jar gl-scanner-java.jar --api_id $env:veracode_id --api_secret_key $env:veracode_key --build_dir "target/classes" --issue_counts "3:0,2:0,1:0,0:0"`
+                        } 
                     } else {
                         withMaven(maven: 'Maven') {
                             bat label: '', script: 'mvn clean verify'
