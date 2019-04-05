@@ -9,7 +9,7 @@ public class Flaw {
     String thing = "test";
     Random rand = new Random();
     double randDouble = rand.nextDouble();
-    //double randDouble2 = rand.nextDouble();
+    double randDouble2 = rand.nextDouble();
     //double randDouble3 = rand.nextDouble();
     //double someDouble = 1.0;
 
