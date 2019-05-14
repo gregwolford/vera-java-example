@@ -3,8 +3,7 @@ package com.srcclr;
 import java.util.Random;
 
 public class Flaw {
-  
-    String passwdOther = "test1234a12331";
+
     //String otherpassword = "tests";
     String thing = "test";
     Random rand = new Random();
