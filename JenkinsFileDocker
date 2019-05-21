@@ -13,6 +13,7 @@ pipeline {
                 dockerfile {
                     filename 'Dockerfile'
                     args '-t mycentos'
+                }
             }
             steps {
                 script {
