@@ -10,8 +10,9 @@ pipeline {
         //SourceClear does a scan of open source libraries used by the app and provides feedback for vulnerabilities 
         stage("SourceClear Scan") {
             agent {
-                dockerfile true
-                args '-t mycentos'
+                dockerfile {
+                    filename 'Dockerfile'
+                    args '-t mycentos'
             }
             steps {
                 script {
