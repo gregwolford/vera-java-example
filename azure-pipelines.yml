@@ -5,6 +5,7 @@ pool:
   vmImage: 'ubuntu-latest'
 
 steps:
+
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
@@ -20,5 +21,6 @@ steps:
   inputs:
     targetType: 'inline'
     script: 'curl -sSL https://download.sourceclear.com/ci.sh | sh'
-    env: 
-      SRCCLR_API_TOKEN: $(SRCCLR_API_TOKEN)
+
+env: 
+    SRCCLR_API_TOKEN: $(SRCCLR_API_TOKEN)
