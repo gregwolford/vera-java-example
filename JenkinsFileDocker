@@ -24,7 +24,7 @@ pipeline {
                     } else {
                         withCredentials([string(credentialsId: 'SRCCLR_API_TOKEN', variable: 'SRCCLR_API_TOKEN')]) {
                             powershell label: '', script: 'Set-ExecutionPolicy AllSigned -Scope Process -Force;'
-                            powershell label: '', script: 'iex ((New-Object System.Net.WebClient).DownloadString("https://download.srcclr.com/ci.ps1")); srcclr scan'
+                            powershell label: '', script: 'iex ((New-Object System.Net.WebClient).DownloadString("https://download.srcclr.com/ci.ps1")); src1clr scan'
                         }
                     }
                 } 
