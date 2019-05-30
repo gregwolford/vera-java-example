@@ -23,3 +23,16 @@ steps:
     script: 'curl -sSL https://download.sourceclear.com/ci.sh | sh'
   env: 
     SRCCLR_API_TOKEN: $(SRCCLR_API_TOKEN)
+
+- task: Veracode@2
+  inputs:
+    ConnectionDetailsSelection: 'Credentials'
+    username: 's'
+    password: 's'
+    veracodeAppProfile: 'JavaExample'
+    version: '$(build.buildNumber)'
+    filepath: '$(build.artifactstagingdirectory)'
+    sandboxName: 'AzureDevOps'
+    createSandBox: false
+    createProfile: false
+    scanStatusCheckInterval: '60'
