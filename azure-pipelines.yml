@@ -33,6 +33,4 @@ steps:
     version: '$(build.buildNumber)'
     filepath: '/home/vsts/work/1/s/target/example-java-maven-1.0-SNAPSHOT.jar'
     sandboxName: 'AzureDevOps'
-    createSandBox: false
-    createProfile: false
     scanStatusCheckInterval: '60'
