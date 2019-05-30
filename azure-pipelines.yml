@@ -26,7 +26,7 @@ steps:
 
 - task: Veracode@2
   inputs:
-    AnalysisService: 'vera_mbrown'
+    AnalysisService: 'vera_azure'
     veracodeAppProfile: 'JavaExample'
     version: '$(build.buildNumber)'
     filepath: '/home/vsts/work/1/s/target/example-java-maven-1.0-SNAPSHOT.jar'
