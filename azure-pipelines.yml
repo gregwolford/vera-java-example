@@ -27,10 +27,9 @@ steps:
 - task: Veracode@2
   inputs:
     ConnectionDetailsSelection: 'Credentials'
-    vid: '$(veracode_id)'
-    vkey: '$(veracode_key)'
+    username: '$(veracode_id)'
+    password: '$(veracode_key)'
     veracodeAppProfile: 'JavaExample'
     version: '$(build.buildNumber)'
     filepath: '/home/vsts/work/1/s/target/example-java-maven-1.0-SNAPSHOT.jar'
     sandboxName: 'AzureDevOps'
-    scanStatusCheckInterval: '60'
