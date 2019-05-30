@@ -17,6 +17,11 @@ steps:
     testResultsFiles: '**/TEST-*.xml'
     goals: 'package'
 
+- task: PublishBuildArtifacts@1
+  inputs:
+    pathtoPublish: $(Build.ArtifactStagingDirectory)
+    artifactName: MyBuildOutputs
+
 - task: Bash@3
   inputs:
     targetType: 'inline'
