@@ -1,0 +1,17 @@
+
+{
+    "IgnoredFlaws": [
+        {
+            "filename": "com/srcclr/Flaw.java",
+            "comments": "comments",
+            "cweid": 331,
+            "flawhash": 4001066716,
+            "flawHashCount": 2,
+            "flawHashOrdinal": 1,
+            "causehash": 2439302015,
+            "causeHashOrdinal": 1,
+            "prototypehash": 4146034803,
+            "procedurehash": 2814355812
+        }
+    ]
+}
