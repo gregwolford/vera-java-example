@@ -14,6 +14,8 @@ pipeline {
                     if(isUnix()) {
                         withCredentials([string(credentialsId: 'SRCCLR_API_TOKEN', variable: 'SRCCLR_API_TOKEN')]) {
                             sh label: '', script: 'curl -O https://download.sourceclear.com/ci.sh'
+                            sh label: '', script: 'sed -i "s/which/type/g" ci.sh'
+                            sh label: '', script: 'sh ci.sh'
                         }
                     } else {
                         withCredentials([string(credentialsId: 'SRCCLR_API_TOKEN', variable: 'SRCCLR_API_TOKEN')]) {
