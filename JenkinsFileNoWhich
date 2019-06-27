@@ -1,0 +1,86 @@
+pipeline {
+    agent any
+    stages {
+        stage("Checkout") {
+            steps{
+                git 'https://github.com/m-browntown/vera-java-example.git'
+            }
+        }
+
+        //SourceClear does a scan of open source libraries used by the app and provides feedback for vulnerabilities 
+        stage("Veracode SrcClr Scan") {
+            steps {
+                script {
+                    if(isUnix()) {
+                        withCredentials([string(credentialsId: 'SRCCLR_API_TOKEN', variable: 'SRCCLR_API_TOKEN')]) {
+                            sh label: '', script: '/home/srcclr.sh'
+                        }
+                    } else {
+                        withCredentials([string(credentialsId: 'SRCCLR_API_TOKEN', variable: 'SRCCLR_API_TOKEN')]) {
+                            powershell label: '', script: 'Set-ExecutionPolicy AllSigned -Scope Process -Force;'
+                            powershell label: '', script: 'iex ((New-Object System.Net.WebClient).DownloadString("https://download.srcclr.com/ci.ps1")); srcclr scan'
+                        }
+                    }
+                } 
+            }
+        }
+
+        stage("Veracode Greenlight Scan") {
+            steps {
+                script {
+                    if(isUnix()) {
+                         withMaven(maven: 'Maven') {
+                            sh label: '', script: 'mvn clean verify'
+                        }
+                        withCredentials([usernamePassword(credentialsId: 'veracode-credentials', passwordVariable: 'veracode_key', usernameVariable: 'veracode_id')]) {
+                            sh label: '', script: '''curl -O https://downloads.veracode.com/securityscan/gl-scanner-java-LATEST.zip'''
+                            sh label: '', script: '''unzip gl-scanner-java-LATEST.zip -d target/gl-scanner-java-LATEST'''
+                            sh label: '', script: '''java -jar "target/gl-scanner-java-LATEST/gl-scanner-java.jar" --api_id $veracode_id --api_secret_key $veracode_key --build_dir "target/classes" --issue_counts "3:0,2:0,1:0,0:0"'''
+                            }
+                    } else {
+                        withMaven(maven: 'Maven') {
+                            bat label: '', script: 'mvn clean verify'
+                        }
+
+                        withCredentials([usernamePassword(credentialsId: 'veracode-credentials', passwordVariable: 'veracode_key', usernameVariable: 'veracode_id')]) {
+                            powershell label: '', script: '''$OutputFile = "target/gl-scanner-java-LATEST.zip"
+                                                             $Url = "https://downloads.veracode.com/securityscan/gl-scanner-java-LATEST.zip"
+                                                             $UnzippedOutputFolder = "target/gl-scanner-java-LATEST"
+                                                             $UnzippedOutputFile = "target/gl-scanner-java-LATEST/gl-scanner-java.jar"
+                                                             Invoke-WebRequest -OutFile $OutputFile -URI $Url
+                                                             Add-Type -assembly "system.io.compression.filesystem"
+                                                             [io.compression.zipfile]::ExtractToDirectory($OutputFile, $UnzippedOutputFolder)
+
+                                                            java -jar $UnzippedOutputFile --api_id $env:veracode_id --api_secret_key $env:veracode_key --build_dir "target/classes" --issue_counts "3:0,2:0,1:0,0:0"
+                                                            '''
+                        }
+                    }
+                }
+            }
+        }
+
+        stage("Build") {
+            steps {
+                script {
+                    if(isUnix()) {
+                        withMaven(maven: 'Maven') {
+                            sh label: '', script: 'mvn clean package'
+                        }
+                    } else {
+                        withMaven(maven: 'Maven') {
+                            bat label: '', script: 'mvn clean package'
+                        }
+                    }
+                }
+            }   
+        }
+
+        stage("Veracode Static Analysis") {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'veracode-credentials', passwordVariable: 'veracode_key', usernameVariable: 'veracode_id')]) {
+                    veracode applicationName: 'JavaExample', criticality: 'VeryHigh', debug: true, fileNamePattern: '', replacementPattern: '', sandboxName: '', scanExcludesPattern: '', scanIncludesPattern: '', scanName: 'Jenkins - Build $buildnumber', teams: '', uploadExcludesPattern: '', uploadIncludesPattern: '**/**.jar', useIDkey: true, vid: env.veracode_id, vkey: env.veracode_key, vpassword: '', vuser: ''
+                }
+            }
+        }
+    }
+}
