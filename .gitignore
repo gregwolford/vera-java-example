@@ -1,2 +1,10 @@
 target/
 .mvn/timing.properties
+
+.settings/
+.project
+.classpath
+
+.DS_Store
+
+.vscode/
