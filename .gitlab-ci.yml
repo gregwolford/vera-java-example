@@ -10,7 +10,7 @@ stages:
 veracode_agent_sca:
   stage: sca
   script: 
-    git branch -l
+    git branch -l \
     curl -sSL https://download.sourceclear.com/ci.sh | sh
 
 maven_build:
