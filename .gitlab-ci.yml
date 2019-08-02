@@ -1,3 +1,6 @@
+variables:
+   BRANCH_NAME: "master"
+
 image: maven:latest
 
 stages:
