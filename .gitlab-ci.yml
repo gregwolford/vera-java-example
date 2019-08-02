@@ -1,23 +1,21 @@
 image: maven:latest
 
 stages:
-  - git
-  - sca
-  - build
+  - veracode_security_tests
 
 git_clone:
-  stage: git
+  stage: veracode_security_tests
   script:
     - git clone https://github.com/m-browntown/vera-java-example.git
     - git branch -l
 
 veracode_agent_sca:
-  stage: sca
+  stage: veracode_security_tests
   script: 
     - git branch -l
     - curl -sSL https://download.sourceclear.com/ci.sh | sh
 
 maven_build:
-  stage: build
+  stage: veracode_security_tests
   script:
     - mvn clean package
