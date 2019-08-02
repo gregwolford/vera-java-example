@@ -1,8 +1,6 @@
 variables:
    BRANCH_NAME: "master"
 
-image: maven:latest
-
 stages:
   - sca
   - build
@@ -11,7 +9,6 @@ veracode_agent_sca:
   stage: sca
   script: 
     curl -sSL https://download.sourceclear.com/ci.sh | sh
-
 
 maven_build:
   stage: build
