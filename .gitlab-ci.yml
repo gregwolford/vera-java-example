@@ -1,13 +1,20 @@
 image: maven:latest
 
 stages:
+  - git
   - sca
   - build
+
+git_clone:
+  stage: git
+  script:
+    - git clone https://github.com/m-browntown/vera-java-example.git
+    - git branch -l
 
 veracode_agent_sca:
   stage: sca
   script: 
-    - git checkout master
+    - git branch -l
     - curl -sSL https://download.sourceclear.com/ci.sh | sh
 
 maven_build:
