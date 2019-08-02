@@ -7,5 +7,6 @@ veracode_agent_sca:
   stage: sca
   script: 
     - git clone https://github.com/m-browntown/vera-java-example.git
-    - cd /builds/vera-java-example
+    - cd ..
+    - pwd
     - curl -sSL https://download.sourceclear.com/ci.sh | sh
