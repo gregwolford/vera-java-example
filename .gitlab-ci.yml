@@ -16,5 +16,5 @@ veracode_static_and_sca:
     - git clone https://github.com/m-browntown/vera-java-example.git
     - cd vera-java-example
     - mvn clean package
-    - curl 'https://search.maven.org/remotecontent?filepath=com/veracode/vosp/api/wrappers/vosp-api-wrappers-java/19.6.5.8/vosp-api-wrappers-java-19.6.5.8.jar'
-    - java -jar vosp-api-wrappers-java-19.6.5.8.jar -vid $vid -vkey $vkey -action UploadAndScan -appname VeraExample -debug true -toplevel true -filepath '\target\example-java-maven-1.0-SNAPSHOT.jar'
+    - curl 'https://search.maven.org/remotecontent?filepath=com/veracode/vosp/api/wrappers/vosp-api-wrappers-java/19.6.5.8/vosp-api-wrappers-java-19.6.5.8.jar' > veracode.jar
+    - java -jar veracode.jar -vid $vid -vkey $vkey -action UploadAndScan -appname VeraExample -debug true -toplevel true -filepath './target/example-java-maven-1.0-SNAPSHOT.jar'
