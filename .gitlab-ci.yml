@@ -1,6 +1,3 @@
-variables:
-   BRANCH_NAME: "master"
-
 image: maven:latest
 
 stages:
@@ -11,7 +8,6 @@ veracode_agent_sca:
   stage: sca
   script: 
     - git checkout master
-    - git branch -l
     - curl -sSL https://download.sourceclear.com/ci.sh | sh
 
 maven_build:
