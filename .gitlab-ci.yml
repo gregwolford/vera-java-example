@@ -1,14 +1,8 @@
 image: maven:latest
 
 stages:
-  - git
   - sca
   - build
-
-git_clone:
-  stage: git
-  script:
-    git clone https://github.com/m-browntown/vera-java-example.git
 
 veracode_agent_sca:
   stage: sca
