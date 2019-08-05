@@ -1,0 +1,14 @@
+image: maven:3.6.1
+
+pipelines:
+  default:
+    - step:
+        script:
+          - git clone https://github.com/m-browntown/vera-java-example.git
+          - cd vera-java-example
+          - curl -sSL https://download.sourceclear.com/ci.sh | sh
+    - step:
+        caches:
+          - maven
+        script: 
+          - mvn clean package
