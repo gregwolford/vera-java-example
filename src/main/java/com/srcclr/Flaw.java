@@ -11,6 +11,7 @@ public class Flaw {
     SecureRandom secRand = new SecureRandom();
     double randDouble = rand.nextDouble();
     double randDouble2 = rand.nextDouble();
+    double randDouble3 = rand.nextDouble();
     double secureRandDouble3 = secRand.nextDouble();
     //double someDouble = 1.0;
 
