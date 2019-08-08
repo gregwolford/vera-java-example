@@ -1,11 +1,15 @@
+#This is for a github repo using Bitbucket as a CI system 
+#Each stage will clone the repo and the run relevant bitbucket script
 image: maven:3.6.1
 
 pipelines:
   default:
     - step:
         script:
+          #Github
           - git clone https://github.com/m-browntown/vera-java-example.git
           - cd vera-java-example
+          #Bitbucket
           - curl -sSL https://download.sourceclear.com/ci.sh | sh
     - step:
         caches:
