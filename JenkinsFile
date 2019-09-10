@@ -7,8 +7,8 @@ pipeline {
             }
         }
 
-        //SourceClear does a scan of open source libraries used by the app and provides feedback for vulnerabilities 
-        stage("Veracode SrcClr Scan") {
+        //Veracode SCA does a scan of open source libraries used by the app and provides feedback for vulnerabilities 
+        stage("Veracode SCA Scan") {
             steps {
                 script {
                     if(isUnix()) {
