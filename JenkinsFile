@@ -82,5 +82,12 @@ pipeline {
                 }
             }
         }
+        stage("Veracode Static Analysis") {
+            steps {
+                withCredentials([usernamePassword(credentialsId: 'veracode-credentials', passwordVariable: 'veracode_key', usernameVariable: 'veracode_id')]) {
+                     veracodeDynamicAnalysisResubmit analysisName: 'VeraInsecure Internal', maximumDuration: 72, useIDkey: true, vid: env.veracode_id, vkey: env.veracode_key
+                }
+            }
+        }
     }
 }
