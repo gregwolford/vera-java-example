@@ -12,7 +12,7 @@ pipeline {
             steps {
                 script {
                     if(isUnix()) {
-                        withCredentials([string(credentialsId: 'SRCCLR_API_TOKEN', variable: 'SRCCLR_API_TOKEN')]) {
+                        withCredentials([string(credentialsId: 'SRCCLR_API_TOKEN', variable: 'SRCCLR_API_TOKEN', variable: 'DEBUG')]) {
                             sh label: '', script: 'curl https://download.sourceclear.com/ci.sh | sh'
                         }
                     } else {
