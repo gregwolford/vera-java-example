@@ -82,12 +82,12 @@ pipeline {
                 }
             }
         }
-        stage("Veracode Dynamic Analysis") {
-            steps {
-                withCredentials([usernamePassword(credentialsId: 'veracode-credentials', passwordVariable: 'veracode_key', usernameVariable: 'veracode_id')]) {
-                     veracodeDynamicAnalysisResubmit analysisName: 'Java Example', maximumDuration: 72, vid: env.veracode_id, vkey: env.veracode_key
-                }
-            }
-        }
+        //stage("Veracode Dynamic Analysis") {
+            //steps {
+                //withCredentials([usernamePassword(credentialsId: 'veracode-credentials', passwordVariable: 'veracode_key', usernameVariable: 'veracode_id')]) {
+                     //veracodeDynamicAnalysisResubmit analysisName: 'Java Example', maximumDuration: 72, vid: env.veracode_id, vkey: env.veracode_key
+                //}
+            //}
+        //}
     }
 }
