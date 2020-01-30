@@ -18,6 +18,16 @@ steps:
     targetType: 'inline'
     script: 'node -v'
 
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: 'sudo apt-get remove nodejs'
+
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: 'node -v'
+
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
