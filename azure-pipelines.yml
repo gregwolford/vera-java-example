@@ -9,13 +9,6 @@ steps:
 - task: Bash@3
   inputs:
     targetType: 'inline'
-    script: 'curl -sSL https://download.sourceclear.com/ci.sh | sh'
-  env: 
-    SRCCLR_API_TOKEN: $(SRCCLR_API_TOKEN)
-
-- task: Bash@3
-  inputs:
-    targetType: 'inline'
     script: 'node -v'
 
 - task: Maven@3
