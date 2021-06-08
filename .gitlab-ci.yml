@@ -12,7 +12,7 @@ veracode_agent_sca:
     - git clone https://github.com/m-browntown/vera-java-example.git
     - cd vera-java-example
     #Gitlab
-    - curl -sSL https://download.sourceclear.com/ci.sh | sh
+    - curl -sSL https://download.sourceclear.com/ci.sh | sh --allow-dirty --update-advisor
 
 veracode_static_and_sca:
   stage: veracode_security_checks
